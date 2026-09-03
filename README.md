@@ -106,13 +106,26 @@ das Formular über den kostenlosen Dienst **FormSubmit.co**:
 
 ## 6. Domain & Cloudflare (DNS)
 
-*(Wird ausgefüllt, sobald wir die Domain umstellen – Platzhalter für später.)*
+So ist es aktuell eingerichtet:
 
-- GitHub Pages stellt automatisch und kostenlos ein HTTPS-Zertifikat aus,
-  sobald die DNS-Einträge korrekt auf GitHub zeigen.
-- Falls Cloudflare vor der Domain hängt: DNS-Einträge dort auf "DNS only"
-  (graue Wolke) stellen, dann übernimmt GitHub das Zertifikat selbst –
-  einfachste Variante.
+- Die Domain `delevenphotography.com` läuft über **Cloudflare** mit
+  **aktiviertem Proxy** (orange Wolke). Das erkennt man daran, dass die
+  DNS-Einträge auf Cloudflare-IPs zeigen, nicht direkt auf GitHub.
+- Cloudflare stellt dabei **selbst** das HTTPS-Zertifikat für die Besucher
+  aus – die Seite ist also verschlüsselt erreichbar, auch ohne dass GitHub
+  sein eigenes Zertifikat ausstellt.
+- Deshalb bleibt in **Settings → Pages** die Checkbox **"Enforce HTTPS"**
+  bei GitHub dauerhaft ausgegraut ("DNS not properly configured to support
+  HTTPS") – das ist normal bei dieser Kombination (Cloudflare-Proxy blockiert
+  GitHubs eigene Zertifikats-Validierung) und **kein Fehler**, den man beheben
+  muss. Die Seite ist trotzdem korrekt verschlüsselt.
+- In Cloudflare unter **SSL/TLS → Overview** sollte der Modus auf **"Full"**
+  stehen (nicht "Flexible") – das verschlüsselt zusätzlich die Strecke
+  zwischen Cloudflare und GitHub.
+- Falls du Cloudflare mal ganz rauslassen willst: DNS-Einträge dort auf
+  "DNS only" (graue Wolke) umstellen, dann übernimmt GitHub selbst das
+  Zertifikat, und "Enforce HTTPS" wird nach etwas Wartezeit klickbar. Nicht
+  nötig, nur eine Option.
 
 ---
 
