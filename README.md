@@ -8,9 +8,10 @@ Keine Vorkenntnisse nötig – lies einfach den Abschnitt, der zu deinem Vorhabe
 
 ## 1. Was ist das hier überhaupt?
 
-Die Seite lief früher bei Hostinger (kostenpflichtig, ~10 CHF/Monat) mit einem
-Baukasten (Astro/Vue). Sie wurde 1:1 als statische Kopie heruntergeladen und läuft
-jetzt **kostenlos auf GitHub Pages**, unter derselben Domain `delevenphotography.com`.
+Die Seite lief früher bei einem kostenpflichtigen Baukasten-Anbieter (~10 CHF/Monat).
+Sie wurde als reine statische Website (HTML/CSS/Bilder, ohne Baukasten im Hintergrund)
+neu aufgesetzt und läuft jetzt **kostenlos auf GitHub Pages**, unter derselben Domain
+`delevenphotography.com`.
 
 - **Kein Login, keine Datenbank, kein Server** – nur HTML/CSS/Bilder-Dateien.
 - **GitHub Pages** liefert diese Dateien einfach so aus, wie sie im Repo liegen.
@@ -53,35 +54,38 @@ git push
 
 Danach wieder 1–2 Minuten warten, dann ist es live.
 
-**Wichtig zu neuen Fotos:** Die bestehenden Bilder liegen in
-`assets.zyrosite.com/cdn-cgi/image/...` mit kryptischen, automatisch generierten
-Ordnernamen (Grösse, Zuschnitt etc.) – das war der alte Bilder-Dienst des
-Baukastens und ist **nicht** dafür gedacht, dass du dort von Hand neue Bilder
-reinlegst. Für **neue** Fotos: leg einen eigenen Ordner an (z.B. `eigene-bilder/`),
-leg dort dein Foto ab, und verlinke es an der gewünschten Stelle im HTML mit
+**Wichtig zu neuen Fotos:** Die bestehenden Bilder liegen im Ordner `media/` mit
+kryptischen, automatisch generierten Dateinamen (Grösse, Zuschnitt etc.) – dieser
+Ordner ist **nicht** dafür gedacht, dass du dort von Hand neue Bilder reinlegst.
+Für **neue** Fotos: leg einen eigenen Ordner an (z.B. `eigene-bilder/`), leg dort
+dein Foto ab, und verlinke es an der gewünschten Stelle im HTML mit
 `<img src="eigene-bilder/dateiname.jpg">`. Wenn du unsicher bist, frag Claude –
 sag einfach welches Bild wo ausgetauscht werden soll.
 
 ---
 
-## 4. NICHT ANFASSEN – drei Stellen, die extra repariert wurden
+## 4. NICHT ANFASSEN – ein paar Stellen, die extra repariert wurden
 
-Die Original-Seite nutzte Javascript für ein paar Effekte. Beim Export ging
-dieses Javascript verloren, darum wurden drei gezielte Reparaturen eingebaut.
-Wenn diese drei Dinge aus Versehen gelöscht werden, sehen Teile der Seite
-kaputt aus (z.B. unsichtbare Bilder) oder Funktionen hören auf zu arbeiten:
+Ein paar kleine Effekte/Funktionen der alten Seite hingen an Javascript, das beim
+Neuaufbau als reine statische Seite nicht mehr dabei war. Dafür gibt es gezielte
+Reparaturen. Wenn diese aus Versehen gelöscht werden, sehen Teile der Seite kaputt
+aus (z.B. unsichtbare Bilder) oder Funktionen hören auf zu arbeiten:
 
-1. **`_astro-1737562879021/_slug_.5LXp_zWt.css`** – ganz am Ende der Datei steht
-   ein Block mit `/* CUSTOM OVERRIDE ... */`. Der sorgt dafür, dass Bilder/Texte
-   sichtbar sind (ohne ihn: unsichtbare Bilder auf mehreren Seiten).
-2. **`_astro-1737562879021/site-fixes.js`** – eigenes kleines Script, macht das
-   mobile Hamburger-Menü klickbar. Wird in jeder HTML-Datei ganz am Ende
-   eingebunden (`<script src="_astro-1737562879021/site-fixes.js" ...>`).
+1. **`assets/_slug_.5LXp_zWt.css`** – ganz am Ende der Datei steht ein Block mit
+   `/* CUSTOM OVERRIDE ... */`. Der sorgt dafür, dass Bilder/Texte sichtbar sind
+   (ohne ihn: unsichtbare Bilder auf mehreren Seiten).
+2. **`assets/site-fixes.js`** – eigenes kleines Script, macht das mobile
+   Hamburger-Menü klickbar. Wird in jeder HTML-Datei ganz am Ende eingebunden
+   (`<script src="assets/site-fixes.js" ...>`).
 3. **`anfrage.html`** – das Kontaktformular. Siehe Abschnitt 5 unten, dort NICHT
    die `name=`- oder `action=`-Attribute der Eingabefelder entfernen.
+4. In jeder Seite gibt es 3 Telefon-Icons (Menü x2, Fusszeile) mit je einer
+   eindeutigen `clip-path`-ID (`clip0_22_491-1`, `-2`, `-3`). Diese IDs müssen
+   eindeutig bleiben, sonst wird eines der Icons in Safari/iPhone unsichtbar
+   (Chrome/Desktop zeigt den Fehler nicht, iPhone-Safari schon).
 
-Wenn du an diesen drei Dateien allgemein etwas änderst (z.B. Text im Formular),
-ist das kein Problem – lösch einfach nicht diese speziellen Zeilen/Blöcke.
+Wenn du an diesen Dateien allgemein etwas änderst (z.B. Text im Formular), ist das
+kein Problem – lösch einfach nicht diese speziellen Zeilen/Blöcke.
 
 ---
 
@@ -138,11 +142,23 @@ So ist es aktuell eingerichtet:
 
 ---
 
-## 8. Kurz-Übersicht: Was wurde am Original geändert?
+## 8. Impressum-Seite
+
+`impressum.html` enthält Kontaktangaben, Haftungsausschluss, Urheberrecht und einen
+kurzen Datenschutz-Hinweis (v.a. zum Kontaktformular/FormSubmit). Verlinkt ist sie
+klein und unauffällig unten in der Fusszeile jeder Seite. Änderungen daran gehen
+genau gleich wie bei jeder anderen Seite (Abschnitt 2 oder 3).
+
+---
+
+## 9. Kurz-Übersicht: Was wurde am Original geändert?
 
 | Was | Warum |
 |---|---|
 | CSS-Override am Dateiende angehängt | Bilder/Texte waren unsichtbar (fehlendes Animations-JS) |
 | `anfrage.html`: Formularfelder bekamen `name=`, Formular bekam `action=` zu FormSubmit.co | Formular hat vorher gar keine Daten verschickt |
 | `site-fixes.js` neu, in jeder Seite eingebunden | Mobiles Menü liess sich nicht öffnen |
-| Alle Seiten von `delevenphotography.com/` ins Haupt­verzeichnis verschoben, Pfade angepasst | GitHub Pages braucht `index.html` im Root, damit die Domain direkt darauf zeigt |
+| Alle Seiten ins Haupt­verzeichnis verschoben, Ordner umbenannt (`media/`, `fonts/`, `assets/`), Pfade angepasst | GitHub Pages braucht `index.html` im Root, damit die Domain direkt darauf zeigt |
+| Eindeutige `clip-path`-IDs für die Telefon-Icons | Icon war in Safari/iPhone unsichtbar |
+| Diverse Tippfehler korrigiert (Gross-/Kleinschreibung, „Telefonnnummer“ etc.) | Textqualität |
+| `impressum.html` neu erstellt, in Fusszeile verlinkt | Rechtliche Grundangaben |
