@@ -151,7 +151,30 @@ genau gleich wie bei jeder anderen Seite (Abschnitt 2 oder 3).
 
 ---
 
-## 9. Kurz-Übersicht: Was wurde am Original geändert?
+## 9. Google & Link-Vorschau (SEO)
+
+Unsichtbar für Besucher, aber wichtig für Google und für geteilte Links:
+
+- **Bildbeschreibungen (`alt="..."`)**: Jedes Foto hat eine kurze Beschreibung
+  (z.B. "Brautpaar küsst sich vor Schloss Waldegg – Hochzeit von Romana & Remo").
+  Google-Bildersuche liest diese Texte. Wenn du ein neues Foto einbaust, gib ihm
+  auch so eine Beschreibung.
+- **`sitemap.xml`**: Liste aller Seiten für Google. Wenn du eine neue Seite
+  anlegst (z.B. eine neue Hochzeit), füge dort eine Zeile nach dem gleichen
+  Muster hinzu.
+- **Ordner `og/`**: Vorschaubilder (1200×630), die erscheinen, wenn jemand einen
+  Link zu deiner Seite in WhatsApp, Facebook usw. teilt. Pro Seite eines, im
+  HTML-Kopf verlinkt über `og:image`.
+- **Startseite, Block `application/ld+json`**: Firmendaten (Name, Adresse,
+  Telefon) in einer Form, die Google für die lokale Suche versteht. Ändert sich
+  Adresse oder Telefonnummer, hier auch anpassen.
+- **Seiten-Adressen**: Google kennt deine Seiten ohne `.html` (z.B.
+  `delevenphotography.com/galerie`). GitHub Pages liefert beide Varianten aus;
+  `canonical`, `og:url` und `sitemap.xml` nennen bewusst die Variante ohne `.html`.
+
+---
+
+## 10. Kurz-Übersicht: Was wurde am Original geändert?
 
 | Was | Warum |
 |---|---|
@@ -162,3 +185,8 @@ genau gleich wie bei jeder anderen Seite (Abschnitt 2 oder 3).
 | Eindeutige `clip-path`-IDs für die Telefon-Icons | Icon war in Safari/iPhone unsichtbar |
 | Diverse Tippfehler korrigiert (Gross-/Kleinschreibung, „Telefonnnummer“ etc.) | Textqualität |
 | `impressum.html` neu erstellt, in Fusszeile verlinkt | Rechtliche Grundangaben |
+| Alle Fotos mit Bildbeschreibung (`alt`) versehen | Waren leer; wichtig für Google-Bildersuche und Barrierefreiheit |
+| `sitemap.xml` neu erstellt | `robots.txt` verwies auf eine Sitemap, die es nicht gab |
+| Link-Vorschaubilder in `og/`, `og:image` darauf umgestellt | Verwiesen auf eine nicht vorhandene Datei, geteilte Links hatten kein Bild |
+| `canonical` absolut statt relativ | Eindeutige Adresse pro Seite für Google |
+| Firmendaten (`ld+json`) auf der Startseite | Für die lokale Suche ("Hochzeitsfotograf Solothurn") |
