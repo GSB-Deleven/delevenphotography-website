@@ -75,7 +75,9 @@ aus (z.B. unsichtbare Bilder) oder Funktionen hören auf zu arbeiten:
    `/* CUSTOM OVERRIDE ... */`. Der sorgt dafür, dass Bilder/Texte sichtbar sind
    (ohne ihn: unsichtbare Bilder auf mehreren Seiten).
 2. **`assets/site-fixes.js`** – eigenes kleines Script, macht das mobile
-   Hamburger-Menü klickbar. Wird in jeder HTML-Datei ganz am Ende eingebunden
+   Hamburger-Menü klickbar und öffnet die Fotos auf den Hochzeitsseiten per
+   Klick gross (mit Blättern per Pfeil/Wischen, schliessen mit Esc). Wird in
+   jeder HTML-Datei ganz am Ende eingebunden
    (`<script src="assets/site-fixes.js" ...>`).
 3. **`anfrage.html`** – das Kontaktformular. Siehe Abschnitt 5 unten, dort NICHT
    die `name=`- oder `action=`-Attribute der Eingabefelder entfernen.
@@ -181,6 +183,7 @@ Unsichtbar für Besucher, aber wichtig für Google und für geteilte Links:
 | CSS-Override am Dateiende angehängt | Bilder/Texte waren unsichtbar (fehlendes Animations-JS) |
 | `anfrage.html`: Formularfelder bekamen `name=`, Formular bekam `action=` zu FormSubmit.co | Formular hat vorher gar keine Daten verschickt |
 | `site-fixes.js` neu, in jeder Seite eingebunden | Mobiles Menü liess sich nicht öffnen |
+| Bildansicht (Lightbox) in `site-fixes.js` | Fotos zeigten eine Lupe, Klick darauf tat aber nichts |
 | Alle Seiten ins Haupt­verzeichnis verschoben, Ordner umbenannt (`media/`, `fonts/`, `assets/`), Pfade angepasst | GitHub Pages braucht `index.html` im Root, damit die Domain direkt darauf zeigt |
 | Eindeutige `clip-path`-IDs für die Telefon-Icons | Icon war in Safari/iPhone unsichtbar |
 | Diverse Tippfehler korrigiert (Gross-/Kleinschreibung, „Telefonnnummer“ etc.) | Textqualität |
